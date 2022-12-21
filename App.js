@@ -1,20 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import DetailPost from "./src/DetailPost";
+import Home from "./src/Home";
+import { MaterialIcons } from "@expo/vector-icons";
+import AddPost from "./src/AddPost";
 
+const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={({ navigation }) => ({
+            title: "Danh sách bài viết",
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={({}) => navigation.navigate("AddPost")}
+              >
+                <MaterialIcons name="add" size={24} color="black" />
+              </TouchableOpacity>
+            ),
+          })}
+          name="Home"
+          component={Home}
+        />
+        <Stack.Screen
+          options={({ navigation }) => ({
+            title: "Chi tiết bài viết",
+            headerRight: () => (
+              <TouchableOpacity>
+                <MaterialIcons name="delete" size={24} color="black" />
+              </TouchableOpacity>
+            ),
+          })}
+          name="DetailPost"
+          component={DetailPost}
+        />
+        <Stack.Screen name="AddPost" component={AddPost} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const styles = StyleSheet.create({});

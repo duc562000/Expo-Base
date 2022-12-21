@@ -30,7 +30,7 @@ export default function App() {
           options={({ navigation }) => ({
             title: "Chi tiết bài viết",
             headerRight: () => (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => console.log(object)}>
                 <MaterialIcons name="delete" size={24} color="black" />
               </TouchableOpacity>
             ),
